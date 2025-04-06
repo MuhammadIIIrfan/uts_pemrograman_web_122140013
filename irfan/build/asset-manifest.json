@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c9e78c04.css",
+    "main.js": "/static/js/main.39b06307.js",
+    "static/media/hukum3.png": "/static/media/hukum3.78f41338fc3f28a960ad.png",
+    "static/media/hukum2.png": "/static/media/hukum2.eb1e7e686bfe048f19d7.png",
+    "static/media/hukum1.png": "/static/media/hukum1.0c4b9a80fcfde6cd7a12.png",
+    "index.html": "/index.html",
+    "main.c9e78c04.css.map": "/static/css/main.c9e78c04.css.map",
+    "main.39b06307.js.map": "/static/js/main.39b06307.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9e78c04.css",
+    "static/js/main.39b06307.js"
+  ]
+}
