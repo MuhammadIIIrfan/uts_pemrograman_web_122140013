@@ -4,7 +4,7 @@ import './Home.css'; // nanti buat file ini juga
 const Home = () => {
   return (
     <div className="home-container">
-      <img src="/image/banner-hukum.jpg" alt="Berita Hukum" className="home-banner" />
+      <img src="/image/banner-hukum.png" alt="Berita Hukum" className="home-banner" />
 
       <h1>Selamat datang di Literasi Hukum</h1>
       <p>

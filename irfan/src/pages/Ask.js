@@ -1,54 +1,110 @@
-import { useReducer, useRef, useEffect } from 'react'
-import { questionReducer, initialState } from '../reducers/questionReducer'
+import React, { useState } from 'react';
 
-export default function Ask() {
-  const [state, dispatch] = useReducer(questionReducer, initialState)
-  const inputRef = useRef(null)
+const Ask = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    question: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (state.question.trim() === '') {
-      alert('Pertanyaan tidak boleh kosong!')
-      return
-    }
-
-    console.log('Pertanyaan dikirim:', state.question)
-    dispatch({ type: 'SUBMIT' })
-
-    setTimeout(() => {
-      dispatch({ type: 'RESET' })
-    }, 3000)
-  }
-
-  useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
+    e.preventDefault();
+    alert('Pertanyaan berhasil dikirim! Terima kasih telah bertanya.');
+    setFormData({ name: '', email: '', question: '' });
+  };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Tanyakan Sesuatu</h1>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          ref={inputRef}
-          value={state.question}
-          onChange={(e) =>
-            dispatch({ type: 'SET_QUESTION', payload: e.target.value })
-          }
-          className="w-full p-3 border rounded mb-4"
-          rows={5}
-          placeholder="Tulis pertanyaan Anda di sini..."
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Kirim
-        </button>
-      </form>
+    <div style={styles.container}>
+      <h2 style={styles.title}>Ajukan Pertanyaan Hukum</h2>
+      <p style={styles.subtitle}>Punya pertanyaan tentang hukum? Isi formulir di bawah dan kami akan mencoba membantu menjawabnya.</p>
 
-      {state.submitted && (
-        <p className="mt-4 text-green-600">Pertanyaan berhasil dikirim!</p>
-      )}
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <label style={styles.label}>Nama:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={styles.input}
+        />
+
+        <label style={styles.label}>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          style={styles.input}
+        />
+
+        <label style={styles.label}>Pertanyaan:</label>
+        <textarea
+          name="question"
+          value={formData.question}
+          onChange={handleChange}
+          required
+          rows="5"
+          style={styles.textarea}
+        />
+
+        <button type="submit" style={styles.button}>Kirim Pertanyaan</button>
+      </form>
     </div>
-  )
-}
+  );
+};
+
+const styles = {
+  container: {
+    padding: '30px',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: '10px',
+  },
+  subtitle: {
+    textAlign: 'center',
+    marginBottom: '30px',
+    color: '#555',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  label: {
+    marginBottom: '8px',
+    fontWeight: 'bold',
+  },
+  input: {
+    padding: '10px',
+    marginBottom: '20px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+  },
+  textarea: {
+    padding: '10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    marginBottom: '20px',
+  },
+  button: {
+    backgroundColor: '#2c2f33',
+    color: '#fff',
+    padding: '12px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  }
+};
+
+export default Ask;
